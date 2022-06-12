@@ -1,5 +1,5 @@
 module.exports = {
-  //可选类型
+  // 可选类型
   types: [
     { value: 'feat', name: 'feat:   新功能' },
     { value: 'fix', name: 'fix:   修复' },
@@ -16,7 +16,7 @@ module.exports = {
     { value: 'build', name: 'build:   打包' },
     { value: 'revert', name: 'revert:   回退' }
   ],
-  //消息步骤
+  // 消息步骤
   messages: {
     type: '请选择提交类型',
     customScope: '请输入修改范围(可选)',
@@ -25,8 +25,8 @@ module.exports = {
     footer: '请输入要关闭的issue(可选)',
     confirmCommit: '确认以上信息提交?(y/n)'
   },
-  //跳过问题
+  // 跳过问题
   skipQuestion: ['body', 'footer'],
-  //subject文字长度默认是
+  // subject文字长度默认是
   subjectLimit: 72
 }
