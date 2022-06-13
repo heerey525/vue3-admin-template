@@ -17,7 +17,10 @@
       <el-form-item>
         <span class="svg-container">
           <el-icon>
-            <avatar />
+            <!-- <avatar /> -->
+            <span class="svg-container">
+              <svg-icon icon="https://res.lgdsunday.club/user.svg"></svg-icon>
+            </span>
           </el-icon>
         </span>
         <el-input placeholder="password" name="password"></el-input>
@@ -38,6 +41,7 @@
 
 <script setup>
 import { Avatar } from '@element-plus/icons'
+import SvgIcon from '@/components/SvgIcon/index.vue'
 import {} from 'vue'
 </script>
 
