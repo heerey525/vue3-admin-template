@@ -1,37 +1,68 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form">
+    <el-form class="login-form" :model="loginForm" :rules="loginRules">
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
       <!-- 用户名 -->
-      <el-form-item>
+      <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon="user"></svg-icon>
         </span>
-        <el-input placeholder="username" name="username" type="text"></el-input>
+        <el-input
+          placeholder="请输入用户名"
+          type="text"
+          v-model="loginForm.username"
+        ></el-input>
       </el-form-item>
       <!-- 密码 -->
-      <el-form-item>
+      <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon="password"></svg-icon>
         </span>
-        <el-input placeholder="password" name="password"></el-input>
-        <span class="show-pwd">
-          <svg-icon icon="eye"></svg-icon>
+        <el-input
+          placeholder="请输入密码"
+          :type="passwordType"
+          v-model="loginForm.password"
+        ></el-input>
+        <span class="show-pwd" @click="passwordTypeChange">
+          <svg-icon :icon="eyeIcon"></svg-icon>
         </span>
       </el-form-item>
 
       <!-- 登录按钮 -->
-      <el-button type="primary" style="width: 100%; margin-bottom: 30px"
-        >登录</el-button
-      >
+      <el-button type="primary" class="login-submit">登录</el-button>
     </el-form>
   </div>
 </template>
 
 <script setup>
-import {} from 'vue'
+import { ref, computed } from 'vue'
+const validatePassword = (rule, value, callback) => {
+  if (!value) return callback(new Error('请输入密码'))
+  if (value.length < 6) return callback(new Error('密码不能少于6位'))
+  callback()
+}
+
+const loginForm = ref({
+  username: 'superAdmin',
+  password: '123456'
+})
+
+const passwordType = ref('password')
+
+const loginRules = ref({
+  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  password: [{ required: true, validator: validatePassword, trigger: 'blur' }]
+})
+
+const passwordTypeChange = () => {
+  passwordType.value = passwordType.value === 'password' ? 'text' : 'password'
+}
+
+const eyeIcon = computed(() =>
+  passwordType.value === 'password' ? 'eye' : 'eye-open'
+)
 </script>
 
 <style lang="scss" scoped>
@@ -74,6 +105,11 @@ $cursor: #fff;
         color: $light_gray;
         caret-color: $cursor;
       }
+    }
+
+    .login-submit {
+      width: 100%;
+      margin-bottom: 30px;
     }
   }
 
