@@ -1,6 +1,11 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" :model="loginForm" :rules="loginRules">
+    <el-form
+      class="login-form"
+      :model="loginForm"
+      :rules="loginRules"
+      ref="loginFormRef"
+    >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
@@ -31,13 +36,22 @@
       </el-form-item>
 
       <!-- 登录按钮 -->
-      <el-button type="primary" class="login-submit">登录</el-button>
+      <el-button
+        type="primary"
+        class="login-submit"
+        @click="loginSubmit(loginFormRef)"
+        >登录</el-button
+      >
     </el-form>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import { ElMessage } from 'element-plus'
+
+const loginFormRef = ref()
+
 const validatePassword = (rule, value, callback) => {
   if (!value) return callback(new Error('请输入密码'))
   if (value.length < 6) return callback(new Error('密码不能少于6位'))
@@ -55,14 +69,22 @@ const loginRules = ref({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, validator: validatePassword, trigger: 'blur' }]
 })
-
-const passwordTypeChange = () => {
-  passwordType.value = passwordType.value === 'password' ? 'text' : 'password'
-}
-
+// 计算属性-密码类型Icon
 const eyeIcon = computed(() =>
   passwordType.value === 'password' ? 'eye' : 'eye-open'
 )
+// 点击切换密码显示类型
+const passwordTypeChange = () => {
+  passwordType.value = passwordType.value === 'password' ? 'text' : 'password'
+}
+// 点击登录
+const loginSubmit = (formEl) => {
+  if (!formEl) return
+  formEl.validate((valid, fields) => {
+    if (!valid) return
+    ElMessage.success('登录验证通过！')
+  })
+}
 </script>
 
 <style lang="scss" scoped>
