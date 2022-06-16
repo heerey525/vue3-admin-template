@@ -2,7 +2,7 @@ import { login } from '@/api/sys'
 import md5 from 'md5'
 
 export default {
-  namespace: true,
+  namespaced: true,
   state: () => ({}),
   mutations: {},
   actions: {

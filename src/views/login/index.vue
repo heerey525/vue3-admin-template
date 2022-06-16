@@ -39,6 +39,7 @@
       <el-button
         type="primary"
         class="login-submit"
+        :loading="loading"
         @click="loginSubmit(loginFormRef)"
         >登录</el-button
       >
@@ -49,6 +50,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
+import { useStore } from 'vuex'
 
 const loginFormRef = ref()
 
@@ -69,6 +71,9 @@ const loginRules = ref({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, validator: validatePassword, trigger: 'blur' }]
 })
+
+const loading = ref(false)
+const store = useStore()
 // 计算属性-密码类型Icon
 const eyeIcon = computed(() =>
   passwordType.value === 'password' ? 'eye' : 'eye-open'
@@ -82,7 +87,17 @@ const loginSubmit = (formEl) => {
   if (!formEl) return
   formEl.validate((valid, fields) => {
     if (!valid) return
-    ElMessage.success('登录验证通过！')
+    loading.value = true
+    store
+      .dispatch('user/login', loginForm.value)
+      .then((res) => {
+        loading.value = false
+        ElMessage.success('登录验证通过！')
+      })
+      .catch((err) => {
+        console.log(err)
+        loading.value = false
+      })
   })
 }
 </script>
