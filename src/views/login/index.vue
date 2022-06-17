@@ -90,7 +90,7 @@ const loginSubmit = (formEl) => {
     loading.value = true
     store
       .dispatch('user/login', loginForm.value)
-      .then((res) => {
+      .then(() => {
         loading.value = false
         ElMessage.success('登录验证通过！')
       })
