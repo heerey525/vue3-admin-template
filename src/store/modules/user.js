@@ -3,6 +3,7 @@ import md5 from 'md5'
 import { getItem, setItem, removeAllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
 import router from '@/router'
+import { setTimeStamp } from '@/utils/auth'
 
 export default {
   namespaced: true,
@@ -30,7 +31,10 @@ export default {
         })
           .then((data) => {
             this.commit('user/setToken', data.token)
+            // 跳转
             router.push('/layout')
+            // 保存登录时间
+            setTimeStamp()
             resolve()
           })
           .catch((err) => {
