@@ -32,7 +32,7 @@ export default {
           .then((data) => {
             this.commit('user/setToken', data.token)
             // 跳转
-            router.push('/layout')
+            router.push('/')
             // 保存登录时间
             setTimeStamp()
             resolve()

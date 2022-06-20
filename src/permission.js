@@ -14,7 +14,7 @@ router.beforeEach(async (to, form, next) => {
   // 用户已登录不允许进入login
   if (store.getters.token) {
     if (to.path === '/login') {
-      next('/layout')
+      next('/')
     } else {
       // 判断用户资料是否存在，如果不存在，则获取用户信息
       if (!store.getters.hasUserInfo) {
