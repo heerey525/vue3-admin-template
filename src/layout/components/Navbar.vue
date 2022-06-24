@@ -3,13 +3,17 @@
     <hamburger />
     <breadcrumb id="guide-breadcrumb" class="breadcrumb-container" />
     <div class="right-menu">
+      <lang-select class="right-menu-item hover-effect" />
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <el-avatar
             shape="square"
             :size="40"
-            :src="$store.getters.userInfo.avatar"
+            :src="
+              $store.getters.userInfo.avatar ||
+              `https://element-plus.gitee.io/images/element-plus-logo.svg`
+            "
           ></el-avatar>
           <i class="el-icon-s-tools"></i>
         </div>
@@ -36,6 +40,7 @@ import {} from 'vue'
 import store from '@/store'
 import hamburger from '@/components/hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
+import LangSelect from '@/components/LangSelect'
 
 const logout = () => {
   store.dispatch('user/logout')
@@ -72,6 +77,23 @@ const logout = () => {
     align-items: center;
     float: right;
     padding-right: 16px;
+
+    ::v-deep .right-menu-item {
+      display: inline-block;
+      padding: 0 18px 0 0;
+      font-size: 24px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
+
+      &.hover-effect {
+        cursor: pointer;
+        transition: background 0.3s;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.025);
+        }
+      }
+    }
 
     ::v-deep .avatar-container {
       cursor: pointer;
