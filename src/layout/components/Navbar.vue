@@ -12,10 +12,11 @@
             :size="40"
             :src="
               $store.getters.userInfo.avatar ||
-              `https://element-plus.gitee.io/images/element-plus-logo.svg`
+              `https://element-plus.gitee.io/images/element-plus-logo-small.svg`
             "
           ></el-avatar>
-          <i class="el-icon-s-tools"></i>
+          <!-- <i class="el-icon-s-tools"></i> -->
+          <el-icon><Tools /></el-icon>
         </div>
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">

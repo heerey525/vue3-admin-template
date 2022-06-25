@@ -39,6 +39,7 @@
       <el-button
         type="primary"
         class="login-submit"
+        size="large"
         :loading="loading"
         @click="loginSubmit(loginFormRef)"
         >登录</el-button
@@ -136,6 +137,19 @@ $cursor: #fff;
       input {
         height: 47px;
         background: transparent;
+        border: none;
+        border-radius: 0px;
+        // padding: 12px 5px 12px 15px;
+        color: $light_gray;
+        caret-color: $cursor;
+      }
+
+      .el-input__wrapper {
+        width: 100%;
+        height: 47px;
+        background: transparent;
+        box-shadow: none;
+
         border: none;
         border-radius: 0px;
         padding: 12px 5px 12px 15px;

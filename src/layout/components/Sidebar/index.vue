@@ -4,7 +4,7 @@
       <el-avatar
         :size="logoHeight"
         shape="square"
-        src="https://element-plus.gitee.io/images/element-plus-logo.svg"
+        src="https://element-plus.gitee.io/images/element-plus-logo-small.svg"
       />
       <h1 class="logo-title" v-if="$store.getters.sidebarOpened">vue3-admin</h1>
     </div>
