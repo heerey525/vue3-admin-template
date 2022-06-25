@@ -32,7 +32,7 @@ defineProps({
   effect: {
     type: String,
     default: 'dark',
-    validator: function(value) {
+    validator: function (value) {
       // 这个值必须匹配下列字符串中的一个
       return ['dark', 'light'].indexOf(value) !== -1
     }
@@ -44,9 +44,10 @@ const language = computed(() => store.getters.language)
 
 // 切换语言的方法
 const i18n = useI18n()
-const handleSetLanguage = lang => {
+const handleSetLanguage = (lang) => {
   i18n.locale.value = lang
   store.commit('app/setLanguage', lang)
   ElMessage.success(i18n.t('msg.toast.switchLangSuccess'))
+  window.location.reload()
 }
 </script>

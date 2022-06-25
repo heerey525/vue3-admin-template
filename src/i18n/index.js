@@ -4,12 +4,18 @@ import { createI18n } from 'vue-i18n'
 const messages = {
   en: {
     msg: {
-      test: 'hello world'
+      test: 'hello world',
+      toast: {
+        switchLangSuccess: 'Switch Language Success'
+      }
     }
   },
   zh: {
     msg: {
-      test: '你好世界'
+      test: '你好世界',
+      toast: {
+        switchLangSuccess: '切换语言成功'
+      }
     }
   }
 }
