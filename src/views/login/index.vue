@@ -7,7 +7,8 @@
       ref="loginFormRef"
     >
       <div class="title-container">
-        <h3 class="title">用户登录</h3>
+        <h3 class="title">{{ $t('msg.login.title') }}</h3>
+        <lang-select class="lang-select" effect="light"></lang-select>
       </div>
       <!-- 用户名 -->
       <el-form-item prop="username">
@@ -42,22 +43,28 @@
         size="large"
         :loading="loading"
         @click="loginSubmit(loginFormRef)"
-        >登录</el-button
+        >{{ $t('msg.login.loginBtn') }}</el-button
       >
+
+      <div class="tips" v-html="$t('msg.login.desc')"></div>
     </el-form>
   </div>
 </template>
 
 <script setup>
+import LangSelect from '@/components/LangSelect/index.vue'
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
 import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
 
 const loginFormRef = ref()
 
+const i18n = useI18n()
 const validatePassword = (rule, value, callback) => {
-  if (!value) return callback(new Error('请输入密码'))
-  if (value.length < 6) return callback(new Error('密码不能少于6位'))
+  if (value.length < 6) {
+    return callback(new Error(i18n.t('msg.login.passwordRule')))
+  }
   callback()
 }
 
@@ -69,7 +76,13 @@ const loginForm = ref({
 const passwordType = ref('password')
 
 const loginRules = ref({
-  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  username: [
+    {
+      required: true,
+      message: i18n.t('msg.login.usernameRule'),
+      trigger: 'blur'
+    }
+  ],
   password: [{ required: true, validator: validatePassword, trigger: 'blur' }]
 })
 
@@ -164,6 +177,19 @@ $cursor: #fff;
     }
   }
 
+  .tips {
+    font-size: 16px;
+    line-height: 28px;
+    color: #fff;
+    margin-bottom: 10px;
+
+    span {
+      &:first-of-type {
+        margin-right: 16px;
+      }
+    }
+  }
+
   .svg-container {
     padding: 6px 5px 6px 15px;
     color: $dark_gray;
@@ -180,6 +206,17 @@ $cursor: #fff;
       margin: 0px auto 40px;
       text-align: center;
       font-weight: bold;
+    }
+
+    ::v-deep(.lang-select) {
+      position: absolute;
+      top: 4px;
+      right: 0;
+      background-color: white;
+      font-size: 22px;
+      padding: 4px;
+      border-radius: 4px;
+      cursor: pointer;
     }
   }
 

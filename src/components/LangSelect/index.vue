@@ -48,6 +48,5 @@ const handleSetLanguage = (lang) => {
   i18n.locale.value = lang
   store.commit('app/setLanguage', lang)
   ElMessage.success(i18n.t('msg.toast.switchLangSuccess'))
-  window.location.reload()
 }
 </script>

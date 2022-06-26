@@ -2,6 +2,7 @@ import axios from 'axios'
 import store from '@/store'
 import { ElMessage } from 'element-plus'
 import { isCheckTimeout } from '@/utils/auth'
+import i18n from '@/i18n'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASEURL,
@@ -16,7 +17,9 @@ service.interceptors.request.use(
       if (isCheckTimeout()) {
         // 退出操作
         store.dispatch('user/logout')
-        return Promise.reject(new Error('token 失效'))
+        return Promise.reject(
+          new Error(i18n.global.t('msg.login.tokenInvalid'))
+        )
       }
       config.headers.Authorization = `Bearer ${store.getters.token}`
     }

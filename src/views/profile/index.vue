@@ -1,5 +1,5 @@
 <template>
-  <div class="">个人中心，{{ $t('msg.test') }}</div>
+  <div class="">个人中心</div>
   <el-pagination
     :page-size="100"
     layout="total, prev, pager, next"

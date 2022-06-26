@@ -1,21 +1,17 @@
 import { createI18n } from 'vue-i18n'
+import mZhLocale from './lang/zh'
+import mEnLocale from './lang/en'
 
 // 创建message数据源
 const messages = {
   en: {
     msg: {
-      test: 'hello world',
-      toast: {
-        switchLangSuccess: 'Switch Language Success'
-      }
+      ...mEnLocale
     }
   },
   zh: {
     msg: {
-      test: '你好世界',
-      toast: {
-        switchLangSuccess: '切换语言成功'
-      }
+      ...mZhLocale
     }
   }
 }
