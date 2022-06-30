@@ -3,6 +3,7 @@
     <hamburger />
     <breadcrumb id="guide-breadcrumb" class="breadcrumb-container" />
     <div class="right-menu">
+      <screen-full class="right-menu-item hover-effect" />
       <theme-picker class="right-menu-item hover-effect"></theme-picker>
       <lang-select class="right-menu-item hover-effect" />
       <!-- 头像 -->
@@ -43,6 +44,7 @@ import hamburger from '@/components/hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import LangSelect from '@/components/LangSelect'
 import ThemePicker from '@/components/ThemePicker'
+import ScreenFull from '@/components/Screenfull'
 
 const logout = () => {
   store.dispatch('user/logout')
@@ -82,7 +84,7 @@ const logout = () => {
 
     ::v-deep(.right-menu-item) {
       display: inline-block;
-      padding: 0 18px 0 0;
+      margin: 0 18px 0 0;
       font-size: 24px;
       color: #5a5e66;
       vertical-align: text-bottom;
