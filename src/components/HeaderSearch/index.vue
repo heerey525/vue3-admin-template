@@ -16,10 +16,10 @@
       @change="onSelectChange"
     >
       <el-option
-        v-for="option in 5"
-        :key="option"
-        :label="option"
-        :value="option"
+        v-for="option in searchOptions"
+        :key="option.item.path"
+        :label="option.item.title.join(' > ')"
+        :value="option.item"
       ></el-option>
     </el-select>
   </div>
@@ -79,13 +79,16 @@ const onShowClick = () => {
 // search 相关
 const search = ref('')
 // 搜索结果
-// const searchOptions = ref([])
+const searchOptions = ref([])
 // 搜索方法
 const querySearch = (query) => {
-  console.log('搜索结果', fuse.search(query))
+  if (!query) return (searchOptions.value = [])
+  searchOptions.value = fuse.search(query)
 }
 // 选中回调
-const onSelectChange = (val) => {}
+const onSelectChange = (val) => {
+  router.push(val.path)
+}
 </script>
 
 <style lang="scss" scoped>
