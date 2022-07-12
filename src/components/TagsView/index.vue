@@ -34,6 +34,7 @@
 import ContextMenu from './ContextMenu.vue'
 import { ref, reactive } from 'vue'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 const route = useRoute()
 
 /**
@@ -43,11 +44,15 @@ const isActive = (tag) => {
   return tag.path === route.path
 }
 
+const store = useStore()
 /**
  * 关闭 tag 的点击事件
  */
 const onCloseClick = (index) => {
-  console.log('close')
+  store.commit('app/removeTagsView', {
+    type: 'index',
+    index: index
+  })
 }
 
 // contextMenu 相关
