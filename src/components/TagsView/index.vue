@@ -11,6 +11,7 @@
         v-for="(tag, index) in $store.getters.tagsViewList"
         :key="tag.fullPath"
         :to="{ path: tag.fullPath }"
+        @contextmenu.prevent="openMenu($event, index)"
       >
         {{ tag.title }}
         <el-icon
@@ -21,11 +22,17 @@
         /></el-icon>
       </router-link>
     </el-scrollbar>
+    <context-menu
+      v-show="visible"
+      :style="menuStyle"
+      :index="selectIndex"
+    ></context-menu>
   </div>
 </template>
 
 <script setup>
-import {} from 'vue'
+import ContextMenu from './ContextMenu.vue'
+import { ref, reactive } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 
@@ -41,6 +48,24 @@ const isActive = (tag) => {
  */
 const onCloseClick = (index) => {
   console.log('close')
+}
+
+// contextMenu 相关
+const selectIndex = ref(0)
+const visible = ref(false)
+const menuStyle = reactive({
+  left: 0,
+  top: 0
+})
+/**
+ * 展示 menu
+ */
+const openMenu = (e, index) => {
+  const { x, y } = e
+  menuStyle.left = x + 'px'
+  menuStyle.top = y + 'px'
+  selectIndex.value = index
+  visible.value = true
 }
 </script>
 
