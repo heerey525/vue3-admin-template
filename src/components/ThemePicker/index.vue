@@ -1,6 +1,7 @@
 <template>
   <!-- 主题图标 v-bind：https://v3.cn.vuejs.org/api/instance-properties.html#attrs -->
   <el-dropdown
+    id="guide-theme"
     v-bind="$attrs"
     trigger="click"
     class="theme"
@@ -8,7 +9,7 @@
   >
     <div>
       <el-tooltip :content="$t('msg.navBar.themeChange')">
-        <svg-icon id="guide-theme" icon="change-theme" />
+        <svg-icon icon="change-theme" />
       </el-tooltip>
     </div>
     <template #dropdown>

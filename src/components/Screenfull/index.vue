@@ -1,9 +1,6 @@
 <template>
-  <div @click="onToggle">
-    <svg-icon
-      id="guide-full"
-      :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"
-    />
+  <div id="guide-full" @click="onToggle">
+    <svg-icon :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'" />
   </div>
 </template>
 
@@ -21,7 +18,6 @@ const change = () => {
 
 // 切换事件
 const onToggle = () => {
-  console.log(22222)
   screenfull.toggle()
 }
 
