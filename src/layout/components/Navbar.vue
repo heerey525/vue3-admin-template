@@ -42,7 +42,7 @@
 <script setup>
 import {} from 'vue'
 import store from '@/store'
-import hamburger from '@/components/hamburger'
+import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import LangSelect from '@/components/LangSelect'
 import ThemePicker from '@/components/ThemePicker'
